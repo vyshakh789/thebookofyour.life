@@ -1,0 +1,10 @@
+{
+  "name": "thebookofyour.life",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev ./ --d1 DB=thebookofyourlife-db",
+    "deploy": "wrangler pages deploy ./",
+    "db:init": "wrangler d1 execute thebookofyourlife-db --file=./schema.sql"
+  }
+}
