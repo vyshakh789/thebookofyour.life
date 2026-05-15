@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>thebookofyour.life — User Flow Map</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#171717;--bg4:#1d1d1d;--gold:#c9a84c;--gold-l:#e8d5a3;--gold-d:#8a7235;--accent:#d4764e;--cream:#f5f0e8;--cream-d:#b8b0a0;--dim:#666;--ok:#5a9e6f;--warn:#d4764e}
+body{background:var(--bg);color:var(--cream);font-family:'Inter','Helvetica Neue',Arial,sans-serif;line-height:1.55;padding:48px 32px;min-height:100vh}
+.head{max-width:1400px;margin:0 auto 48px;text-align:center}
+.head h1{font-family:'Georgia',serif;font-size:2.4rem;color:var(--cream);margin-bottom:8px}
+.head h1 em{color:var(--gold);font-style:italic}
+.head p{color:var(--cream-d);font-size:.95rem;max-width:640px;margin:0 auto}
+.head .meta{margin-top:14px;font-size:.78rem;color:var(--dim);font-family:monospace;letter-spacing:1px}
+.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:.75rem}
+.lg{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:var(--bg3);border:1px solid #222;color:var(--cream-d)}
+.lg .dot{width:8px;height:8px;border-radius:50%}
+.lg .e{background:var(--gold)}.lg .a{background:var(--accent)}.lg .o{background:var(--ok)}.lg .d{background:var(--dim)}
+.flows{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:24px;max-width:1400px;margin:0 auto}
+.flow{background:linear-gradient(145deg,#141414,#0c0c0c);border:1px solid rgba(201,168,76,.16);border-radius:16px;padding:28px 26px;box-shadow:6px 6px 18px rgba(0,0,0,.5),-3px -3px 10px rgba(201,168,76,.03)}
+.flow.full{grid-column:1/-1}
+.flow h2{font-family:'Georgia',serif;font-size:1.35rem;color:var(--gold);margin-bottom:6px}
+.flow .sub{font-size:.82rem;color:var(--cream-d);margin-bottom:22px;font-style:italic}
+.tag{display:inline-block;font-family:monospace;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.08);padding:3px 10px;border-radius:100px;margin-right:8px;border:1px solid rgba(201,168,76,.2)}
+.tag.cron{color:var(--accent);background:rgba(212,118,78,.08);border-color:rgba(212,118,78,.25)}
+.tag.api{color:var(--ok);background:rgba(90,158,111,.08);border-color:rgba(90,158,111,.25)}
+.tag.db{color:#7a9bd4;background:rgba(122,155,212,.08);border-color:rgba(122,155,212,.25)}
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.step{position:relative;padding:14px 16px 14px 50px;background:var(--bg3);border:1px solid #1f1f1f;border-radius:10px;font-size:.86rem;color:var(--cream-d);line-height:1.5}
+.step::before{content:attr(data-n);position:absolute;left:14px;top:14px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#0a0a0a;font-size:.72rem;font-weight:700;font-family:monospace;display:flex;align-items:center;justify-content:center}
+.step b{color:var(--cream);font-weight:600}
+.step .meta{display:block;margin-top:6px;font-size:.72rem;color:var(--dim);font-family:monospace;letter-spacing:.5px}
+.step .meta span{color:var(--gold-d)}
+.step.split{padding-left:50px}
+.split-rows{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.split-row{padding:9px 12px;background:#0d0d0d;border-radius:8px;border:1px solid #161616;font-size:.78rem;color:var(--cream-d)}
+.split-row b{color:var(--gold-l)}
+.arrow{text-align:center;color:var(--gold-d);font-size:1.1rem;margin:-2px 0}
+.endpoints{margin-top:28px;padding-top:20px;border-top:1px dashed rgba(201,168,76,.15)}
+.endpoints h3{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:monospace}
+.ep{display:grid;grid-template-columns:60px 1fr;gap:12px;font-family:monospace;font-size:.78rem;padding:6px 0;border-bottom:1px solid #161616;align-items:start}
+.ep:last-child{border:none}
+.ep .m{font-weight:700;color:var(--gold)}
+.ep .m.post{color:var(--accent)}
+.ep .p{color:var(--cream-d);word-break:break-all}
+.ep .p span{color:var(--dim);font-size:.72rem;margin-left:4px}
+.section-title{max-width:1400px;margin:60px auto 20px;font-family:'Georgia',serif;font-size:1.5rem;color:var(--cream);border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:10px}
+.section-title em{color:var(--gold);font-style:italic}
+.summary{max-width:1400px;margin:48px auto 0;background:linear-gradient(145deg,#16140e,#0e0d09);border:1px solid rgba(201,168,76,.2);border-radius:16px;padding:32px 36px}
+.summary h2{font-family:'Georgia',serif;color:var(--gold);font-size:1.4rem;margin-bottom:16px}
+.summary table{width:100%;border-collapse:collapse;font-size:.85rem}
+.summary td,.summary th{padding:10px 14px;text-align:left;border-bottom:1px solid #1a1a1a}
+.summary th{color:var(--gold);font-weight:600;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-family:monospace}
+.summary td.entry{color:var(--cream)}
+.summary td.outcome{color:var(--cream-d)}
+.summary td.viral{color:var(--accent);font-weight:500}
+.summary td.rev{color:var(--gold-l)}
+.notes{max-width:1400px;margin:32px auto 0;font-size:.82rem;color:var(--dim);text-align:center;line-height:1.7}
+.notes b{color:var(--cream-d)}
+@media(max-width:780px){body{padding:24px 16px}.flows{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>thebookofyour.life — <em>user flow map</em></h1>
+  <p>Every path through the site, what state changes happen, what data flows where, and what gets sent over email. Generated after the security hardening pass.</p>
+  <div class="meta">UPDATED 2026-05-09 · 4 USER PATHS · 1 CRON · 6 API ENDPOINTS</div>
+  <div class="legend">
+    <div class="lg"><span class="dot e"></span>User action</div>
+    <div class="lg"><span class="dot a"></span>API call</div>
+    <div class="lg"><span class="dot o"></span>Email sent</div>
+    <div class="lg"><span class="dot d"></span>Background / cron</div>
+  </div>
+</div>
+
+<div class="section-title">Path 1 · <em>The gift flow</em> — sender to recipient</div>
+
+<div class="flows">
+  <div class="flow">
+    <h2>1A · Sender creates the gift</h2>
+    <div class="sub">Visitor wants to gift a book to a specific person.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Hero</b> — clicks "Gift the Philosophy" CTA<span class="meta">→ <span>goSend()</span> shows #sender-section</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Sender form</b> — fills name, email, recipient name, recipient email (optional), personal note (optional)<span class="meta">all fields hj-suppressed</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Submit</b> → <span class="tag api">POST /api/gift</span> with giftType=gift<span class="meta">D1 INSERT into gifts · returns 10-char crypto-random id</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>If recipient email given</b> → email fires via Resend<span class="meta">subject: "X wants to gift you your life philosophy"</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="5"><b>Confirmation screen</b> — shows quiz link, copy button, WhatsApp/email share buttons, "check results later" link with #results/:gid</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h2>1B · Recipient takes the quiz</h2>
+    <div class="sub">Friend opens the link from email or WhatsApp.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Lands on /#gift/:senderName/:gid</b><span class="meta">→ checkHash() validates gid format (alphanumeric, 16 chars max)</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Validate gift</b> → <span class="tag api">GET /api/gift/:id</span><span class="meta">404? show "this gift link doesn't exist" with self-mode fallback CTA</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Quiz landing</b> — shows sender name + personal note (textContent, XSS-safe) + "Discover My Philosophy" CTA</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>25-question quiz</b> — scores accumulate in <span style="font-family:monospace;color:var(--gold)">sc</span> object, top 3 philosophies computed</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="5"><b>Result screen</b> — primary philosophy + quote + top 3 % match. Address form shown (NOT books — surprise preserved)</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="6"><b>Submit address</b> → <span class="tag api">POST /api/result</span><span class="meta">D1 INSERT into results, UPDATE gifts SET status=completed</span></div>
+      <div class="arrow">↓</div>
+      <div class="step split" data-n="7"><b>Two emails fire</b><div class="split-rows">
+        <div class="split-row"><b>To sender</b> → philosophy + book recommendation + Amazon link + recipient address</div>
+        <div class="split-row"><b>Recipient sees</b> → confirmation screen + referral form (kiss-forward)</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h2>1C · Sender views results</h2>
+    <div class="sub">Sender bookmarks the check link or follows the email.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Opens /#results/:gid</b><span class="meta">→ loadSenderResults(gid)</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Fetch</b> → <span class="tag api">GET /api/gift/:id</span> (returns gift + result if complete)</div>
+      <div class="arrow">↓</div>
+      <div class="step split" data-n="3"><b>Two states</b><div class="split-rows">
+        <div class="split-row"><b>If recipient hasn't finished</b> → "Waiting for X to finish..." screen</div>
+        <div class="split-row"><b>If complete</b> → philosophy + book card + Amazon button + delivery address (hj-suppressed)</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Path 2 · <em>Self-discovery</em> — find your own first</div>
+
+<div class="flows">
+  <div class="flow full">
+    <h2>2 · Take the quiz for yourself</h2>
+    <div class="sub">Visitor wants their own philosophy match before deciding what to do with it.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Hero</b> — clicks "Find your own first →" (neumorphic ghost CTA next to primary gift CTA)<span class="meta">→ goSelf()</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Silent gift creation</b> → <span class="tag api">POST /api/gift</span> with giftType=self<span class="meta">creates a tracked record so analytics work · sender_email empty so no email fires</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Quiz directly</b> — same 25 questions, no sender form interstitial</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>Result screen</b> — philosophy + quote + top 3, NO address form. Books shown with neumorphic Amazon affiliate buttons. Background: <span class="tag api">POST /api/result</span> fires silently to save analytics</div>
+      <div class="arrow">↓</div>
+      <div class="step split" data-n="5"><b>Pass-it-on block</b><div class="split-rows">
+        <div class="split-row"><b>Primary CTA</b> → "Gift it forward" — routes to sender form (Path 1A) for one-shot gifting</div>
+        <div class="split-row"><b>Secondary link</b> → "Schedule it for their birthday" — scrolls to Path 3</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Path 3 · <em>Birthday scheduling</em> — set it and forget it</div>
+
+<div class="flows">
+  <div class="flow">
+    <h2>3A · Schedule birthdays</h2>
+    <div class="sub">User wants to never forget another friend's birthday.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Lands on #birthday-section</b><span class="meta">linked from hero, footer, self-mode result</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Fills "About you"</b> — name + email (where reminders land)</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Adds friends</b> — name, email, birthday per row. <b>+ Add another friend</b> to add up to 25.<span class="meta">date input is hj-suppressed</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>Submit</b> → <span class="tag api">POST /api/schedule</span><span class="meta">deduplicates against existing rows for same sender/recipient/birthday · returns 25 max · rate-limit 5/min/IP</span></div>
+      <div class="arrow">↓</div>
+      <div class="step split" data-n="5"><b>Two outcomes</b><div class="split-rows">
+        <div class="split-row"><b>Sender gets</b> → confirmation email listing all scheduled birthdays</div>
+        <div class="split-row"><b>UI shows</b> → confirmation screen with each friend in a card, sorted by which fires first, "in N days" countdown</div>
+      </div></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="6"><b>From confirmation screen</b> → "Schedule more birthdays" (resets form, scrolls back) or "Back to home"</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h2>3B · Cron fires 14 days before</h2>
+    <div class="sub">Daily cron at 03:30 UTC (9:00 AM IST) scans for matching birthdays.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Cron trigger</b> → <span class="tag cron">scheduled()</span> handler in worker fires daily<span class="meta">cf cron pattern: 30 3 * * *</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Compute target MM-DD</b> = today + 14 days. Special case: Feb 28 in non-leap years also matches Feb 29 birthdays</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Query D1</b> → all scheduled_gifts WHERE birthday_md = target AND last_fired_year &lt; thisYear</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>For each match</b> → INSERT into gifts (sender_email preserved, gift_type=birthday) → UPDATE scheduled_gifts SET last_fired_year</div>
+      <div class="arrow">↓</div>
+      <div class="step split" data-n="5"><b>Two emails per match</b><div class="split-rows">
+        <div class="split-row"><b>To friend</b> → "X wants to gift you a book for your birthday" + quiz link</div>
+        <div class="split-row"><b>To sender</b> → "Birthday quiz sent to Y" + tracking link to /#results/:gid</div>
+      </div></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="6"><b>Friend takes the quiz</b> → flows back into Path 1B (recipient flow) → sender gets philosophy + address email</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Path 4 · <em>Kiss-forward</em> — viral loop</div>
+
+<div class="flows">
+  <div class="flow full">
+    <h2>4 · Recipient becomes sender</h2>
+    <div class="sub">After taking a gifted quiz, the recipient pays it forward to one friend.</div>
+    <div class="steps">
+      <div class="step" data-n="1"><b>Recipient confirmation screen</b> shows after submitAddr() completes Path 1B</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="2"><b>Referral form</b> — recipient enters their own email + friend's name + WhatsApp number<span class="meta">email capture added in security pass — without it the loop breaks silently</span></div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="3"><b>Submit</b> → <span class="tag api">POST /api/gift</span> creates new gift (giftType=referral, recipient becomes sender) → <span class="tag api">POST /api/referral</span> tracks the referral link</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="4"><b>WhatsApp opens</b> with prefilled message: "Hey [friend], take this 3-min quiz..." + the new gift link in correct /#gift/Sender/id format</div>
+      <div class="arrow">↓</div>
+      <div class="step" data-n="5"><b>Friend opens link</b> → flows into Path 1B as recipient. Original recipient is now the gifter, gets philosophy + address email when friend finishes.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Endpoints &amp; <em>data layer</em></div>
+
+<div class="flows">
+  <div class="flow full">
+    <h2>API surface · D1 schema · Email triggers</h2>
+    <div class="sub">All endpoints rate-limited per IP, CORS locked to thebookofyour.life origin, request body capped at 16KB, all user input sanitized + HTML-escaped before going into emails.</div>
+
+    <div class="endpoints">
+      <h3>HTTP Endpoints</h3>
+      <div class="ep"><div class="m post">POST</div><div class="p">/api/gift <span>create gift · 20/min/IP · giftType: gift|self|birthday|referral</span></div></div>
+      <div class="ep"><div class="m">GET</div><div class="p">/api/gift/:id <span>fetch gift + result · 60/min/IP · returns personalNote</span></div></div>
+      <div class="ep"><div class="m post">POST</div><div class="p">/api/result <span>submit quiz outcome · 10/min/IP · 409 if already complete</span></div></div>
+      <div class="ep"><div class="m post">POST</div><div class="p">/api/schedule <span>schedule birthdays · 5/min/IP · dedupes within request &amp; against DB</span></div></div>
+      <div class="ep"><div class="m post">POST</div><div class="p">/api/referral <span>track referral · 10/min/IP · max 5 referrals per call</span></div></div>
+      <div class="ep"><div class="m">GET</div><div class="p">/api/cron/process-birthdays <span>manual cron trigger · requires ADMIN_TOKEN secret</span></div></div>
+    </div>
+
+    <div class="endpoints">
+      <h3>D1 Tables</h3>
+      <div class="ep"><div class="m" style="color:#7a9bd4">gifts</div><div class="p">id, sender_name, sender_email, recipient_name, personal_note, status, gift_type, created_at, completed_at</div></div>
+      <div class="ep"><div class="m" style="color:#7a9bd4">results</div><div class="p">gift_id (FK), philosophy_key, philosophy_name, runner_up_1/2, book details, recipient_name/phone/address</div></div>
+      <div class="ep"><div class="m" style="color:#7a9bd4">referrals</div><div class="p">source_gift_id, ref_name, ref_contact, status</div></div>
+      <div class="ep"><div class="m" style="color:#7a9bd4">scheduled_gifts</div><div class="p">sender_name/email, recipient_name/email, birthday, birthday_md (MM-DD index), status, last_fired_year, gift_id</div></div>
+    </div>
+
+    <div class="endpoints">
+      <h3>Resend Email Triggers</h3>
+      <div class="ep"><div class="m" style="color:var(--ok)">→</div><div class="p">recipient invite (POST /api/gift if recipientEmail given)</div></div>
+      <div class="ep"><div class="m" style="color:var(--ok)">→</div><div class="p">sender notification with philosophy + book + address (POST /api/result, skipped for self-mode)</div></div>
+      <div class="ep"><div class="m" style="color:var(--ok)">→</div><div class="p">birthday schedule confirmation to sender (POST /api/schedule)</div></div>
+      <div class="ep"><div class="m" style="color:var(--ok)">→</div><div class="p">birthday quiz to friend (cron, 14 days before)</div></div>
+      <div class="ep"><div class="m" style="color:var(--ok)">→</div><div class="p">birthday quiz fired notification to sender (cron, 14 days before)</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="summary">
+  <h2>Path comparison · entry &amp; outcome</h2>
+  <table>
+    <tr><th>Path</th><th>Entry point</th><th>Time to value</th><th>Revenue trigger</th><th>Viral mechanism</th></tr>
+    <tr>
+      <td class="entry">Gift</td>
+      <td>Hero primary CTA</td>
+      <td>~5 min (sender) + 3 min (recipient)</td>
+      <td class="rev">Amazon affiliate when sender orders book</td>
+      <td class="viral">Recipient → kiss-forward to 1 friend</td>
+    </tr>
+    <tr>
+      <td class="entry">Self</td>
+      <td>Hero secondary neumorphic CTA</td>
+      <td>3 min</td>
+      <td class="rev">Affiliate when self-taker buys book for themselves</td>
+      <td class="viral">Result page CTA → gift forward or birthday schedule</td>
+    </tr>
+    <tr>
+      <td class="entry">Birthday</td>
+      <td>Hero link / dedicated section</td>
+      <td>~30 sec to schedule, fires automatically thereafter</td>
+      <td class="rev">Affiliate when sender orders book (cron triggers Path 1B)</td>
+      <td class="viral">Each scheduled friend becomes a Path 1B recipient → can kiss-forward</td>
+    </tr>
+    <tr>
+      <td class="entry">Kiss-forward</td>
+      <td>Recipient confirmation screen</td>
+      <td>~30 sec</td>
+      <td class="rev">Affiliate from new gift in next loop</td>
+      <td class="viral">The compounding step — every recipient becomes a sender</td>
+    </tr>
+  </table>
+</div>
+
+<div class="notes">
+  <b>Security posture:</b> CSP locked to self + Hotjar + Google Fonts · CORS to thebookofyour.life only · CSRF defended via origin check on POSTs · all D1 queries use prepared statements · all user input sanitized server-side and HTML-escaped before email · gift IDs are crypto-random · admin cron endpoint requires token secret · request body capped at 16KB · per-IP rate limits on every endpoint · address &amp; phone fields suppressed from Hotjar recordings.
+</div>
+
+</body>
+</html>

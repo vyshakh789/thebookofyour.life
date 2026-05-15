@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logo preview · thebookofyour.life</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Helvetica Neue',Arial,sans-serif;background:#0a0a0a;color:#f5f0e8;min-height:100vh;padding:48px 24px}
+.head{max-width:960px;margin:0 auto 48px;text-align:center}
+.head h1{font-family:'Playfair Display',serif;font-size:2rem;font-style:italic}
+.head h1 em{color:#c9a84c}
+.head p{color:#b8b0a0;font-size:.95rem;margin-top:10px}
+.section{max-width:960px;margin:0 auto 60px}
+.section h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:#c9a84c;border-bottom:1px dashed rgba(201,168,76,.2);padding-bottom:8px;margin-bottom:24px;font-style:italic}
+.row{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start}
+.tile{background:linear-gradient(145deg,#141414,#0c0c0c);border:1px solid rgba(201,168,76,.14);border-radius:14px;padding:32px 36px;box-shadow:6px 6px 16px rgba(0,0,0,.6),-3px -3px 12px rgba(201,168,76,.04);text-align:center}
+.tile.light{background:#fff;border-color:#e8d5a3;box-shadow:6px 6px 16px rgba(0,0,0,.15),-3px -3px 12px rgba(201,168,76,.06)}
+.tile.light .lab{color:#666}
+.lab{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#666;letter-spacing:1.5px;margin-top:14px;text-transform:uppercase}
+.tile img{display:block;margin:0 auto}
+.email-mock{max-width:600px;margin:0 auto;background:#fff;border:1px solid #e8e0cc;border-radius:10px;overflow:hidden;color:#1a1a1a;font-family:Georgia,serif}
+.email-mock .header{background:#0a0a0a;padding:18px 0;text-align:center}
+.email-mock .body{padding:32px 36px}
+.email-mock .body p{font-size:1.05rem;line-height:1.7;margin-bottom:14px}
+.email-mock .body .btn{display:inline-block;background:#c8a96e;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:1rem;font-weight:600;font-family:'Inter',sans-serif;margin-top:14px}
+.favs{display:flex;gap:24px;align-items:flex-end}
+.fav{display:flex;flex-direction:column;align-items:center;gap:6px}
+.fav .lab{margin-top:0}
+.notes{max-width:960px;margin:32px auto 0;font-size:.85rem;color:#666;line-height:1.7;text-align:center;font-style:italic;font-family:Georgia,serif}
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>The candle <em>mark</em></h1>
+  <p>The flame is the spark of self-discovery. The lines beneath are the page waiting. One symbol, infinitely scalable.</p>
+</div>
+
+<div class="section">
+  <h2>The mark — symbol only</h2>
+  <div class="row">
+    <div class="tile">
+      <img src="brand/logo-mark.svg" width="120" height="120" alt="">
+      <div class="lab">120px · DARK</div>
+    </div>
+    <div class="tile">
+      <img src="brand/logo-mark.svg" width="64" height="64" alt="">
+      <div class="lab">64px · DARK</div>
+    </div>
+    <div class="tile light">
+      <img src="brand/logo-mark-light.svg" width="120" height="120" alt="">
+      <div class="lab">120px · LIGHT</div>
+    </div>
+    <div class="tile light">
+      <img src="brand/logo-mark-light.svg" width="64" height="64" alt="">
+      <div class="lab">64px · LIGHT</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Favicon — at the sizes the browser actually uses</h2>
+  <div class="row">
+    <div class="tile">
+      <div class="favs">
+        <div class="fav"><img src="brand/logo-mark.svg" width="32" height="32" alt=""><span class="lab">32px</span></div>
+        <div class="fav"><img src="brand/logo-mark.svg" width="24" height="24" alt=""><span class="lab">24px</span></div>
+        <div class="fav"><img src="brand/logo-mark.svg" width="16" height="16" alt=""><span class="lab">16px</span></div>
+      </div>
+    </div>
+    <div class="tile light">
+      <div class="favs">
+        <div class="fav"><img src="brand/logo-mark-light.svg" width="32" height="32" alt=""><span class="lab">32px</span></div>
+        <div class="fav"><img src="brand/logo-mark-light.svg" width="24" height="24" alt=""><span class="lab">24px</span></div>
+        <div class="fav"><img src="brand/logo-mark-light.svg" width="16" height="16" alt=""><span class="lab">16px</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Stacked lockup — mark + wordmark + tagline</h2>
+  <div class="row">
+    <div class="tile" style="padding:8px">
+      <img src="brand/logo-stacked.svg" width="360" height="200" alt="">
+      <div class="lab">FOR FOOTERS, INSTAGRAM, BUSINESS CARDS</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Email header — what your friends actually see</h2>
+  <div class="email-mock">
+    <div class="header">
+      <img src="brand/logo-email-header.svg" width="600" height="120" alt="thebookofyour.life" style="max-width:100%;height:auto">
+    </div>
+    <div class="body">
+      <p>Dear Priya,</p>
+      <p><strong>Vyshakh</strong> wants to send you a book — but not just any book. A book matched to the philosophy closest to your life.</p>
+      <p>Three minutes. Twenty-five honest questions. At the end, one of 31 philosophies and a book hand-picked for who you are.</p>
+      <a href="#" class="btn">Find your philosophy →</a>
+    </div>
+  </div>
+</div>
+
+<div class="notes">
+  All three SVGs share one mark. Edit the gradient stops in any file to retune the candlelight.<br>
+  For Outlook (which strips SVG), export to PNG: <code style="font-family:monospace;color:#c9a84c">brand/logo-email-header.png</code> · we can add that step when you publish to production emails.
+</div>
+
+</body>
+</html>

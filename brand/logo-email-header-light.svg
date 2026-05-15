@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="600" height="120" role="img" aria-label="thebookofyour.life">
+  <defs>
+    <radialGradient id="flame4" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#e8c560" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#c9a84c" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#8a7235" stop-opacity="1"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Mark (no halo on light bg — clean) -->
+  <g transform="translate(180, 6) scale(0.85)">
+    <path d="M60 22 C 60 22, 52 34, 52 46 C 52 56, 56 62, 60 62 C 64 62, 68 56, 68 46 C 68 34, 60 22, 60 22 Z" fill="url(#flame4)"/>
+    <path d="M60 32 C 58 38, 56 44, 58 50 C 60 54, 62 54, 62 50 C 64 44, 62 38, 60 32 Z" fill="#fff" opacity="0.45"/>
+    <line x1="60" y1="62" x2="60" y2="68" stroke="#5a4a20" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="22" y1="84" x2="98" y2="84" stroke="#8a7235" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="30" y1="92" x2="90" y2="92" stroke="#8a7235" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- Wordmark — DARK, for white email backgrounds -->
+  <text x="300" y="108" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, serif"
+        font-style="italic"
+        font-size="22"
+        font-weight="400"
+        fill="#1a1a1a"
+        letter-spacing="0.4">thebookofyour.life</text>
+</svg>

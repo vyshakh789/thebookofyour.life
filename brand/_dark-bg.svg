@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="600" height="120" role="img" aria-label="thebookofyour.life"><rect width="100%" height="100%" fill="#0a0a0a"/>
+  <defs>
+    <radialGradient id="flame3" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#fff3c4" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#e8d5a3" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="halo3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity=".22"/>
+      <stop offset="60%" stop-color="#c9a84c" stop-opacity=".05"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Mark — left side -->
+  <g transform="translate(180, 6) scale(0.85)">
+    <circle cx="60" cy="50" r="38" fill="url(#halo3)"/>
+    <path d="M60 22 C 60 22, 52 34, 52 46 C 52 56, 56 62, 60 62 C 64 62, 68 56, 68 46 C 68 34, 60 22, 60 22 Z" fill="url(#flame3)"/>
+    <path d="M60 32 C 58 38, 56 44, 58 50 C 60 54, 62 54, 62 50 C 64 44, 62 38, 60 32 Z" fill="#fff8dc" opacity="0.7"/>
+    <line x1="60" y1="62" x2="60" y2="68" stroke="#5a4a20" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="22" y1="84" x2="98" y2="84" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="30" y1="92" x2="90" y2="92" stroke="#8a7235" stroke-width="0.9" stroke-linecap="round" opacity="0.55"/>
+  </g>
+
+  <!-- Wordmark — centered horizontally, below the mark -->
+  <text x="300" y="108" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, serif"
+        font-style="italic"
+        font-size="22"
+        font-weight="400"
+        fill="#f5f0e8"
+        letter-spacing="0.4">thebookofyour.life</text>
+</svg>

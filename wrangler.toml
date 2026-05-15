@@ -2,13 +2,25 @@ name = "thebookofyourlife"
 main = "src/index.js"
 compatibility_date = "2024-09-23"
 
-# Import HTML as a text module
+# Import HTML as a text module (brand SVGs/PNGs are inlined as base64 in src/index.js).
+# OG card JPEG is imported as binary Data so the worker can serve it with correct MIME.
 rules = [
-  { type = "Text", globs = ["**/*.html"] }
+  { type = "Text", globs = ["**/*.html"], fallthrough = true },
+  { type = "Data", globs = ["**/*.jpg", "**/*.jpeg"] }
 ]
+
+# Custom domain
+[[routes]]
+pattern = "thebookofyour.life"
+zone_name = "thebookofyour.life"
+custom_domain = true
 
 # D1 Database binding
 [[d1_databases]]
 binding = "DB"
 database_name = "thebookofyourlife-db"
-database_id = "75a5bfdc-a7bd-4cca-b23c-cc71b7984bb7"
+database_id = "3898a1a6-0786-49b7-a9f9-c1d79466a20e"
+
+# Daily birthday reminder cron — 03:30 UTC = 9:00 AM IST
+[triggers]
+crons = ["30 3 * * *"]

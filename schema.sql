@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS gifts (
   recipient_name TEXT NOT NULL,
   personal_note TEXT DEFAULT '',
   status TEXT DEFAULT 'pending',
+  gift_type TEXT DEFAULT 'gift',  -- 'gift' (sender→recipient) | 'self' (user took for themselves) | 'birthday' (cron-fired)
   created_at TEXT DEFAULT (datetime('now')),
   completed_at TEXT
 );
@@ -42,3 +43,21 @@ CREATE TABLE IF NOT EXISTS referrals (
 
 CREATE INDEX IF NOT EXISTS idx_results_gift ON results(gift_id);
 CREATE INDEX IF NOT EXISTS idx_referrals_gift ON referrals(source_gift_id);
+
+-- Scheduled birthday gifts. Cron runs daily and looks for entries where
+-- the next birthday is exactly 14 days away from today (month/day match).
+CREATE TABLE IF NOT EXISTS scheduled_gifts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  sender_name TEXT NOT NULL,
+  sender_email TEXT NOT NULL,
+  recipient_name TEXT NOT NULL,
+  recipient_email TEXT NOT NULL,
+  birthday TEXT NOT NULL,           -- ISO date YYYY-MM-DD
+  birthday_md TEXT NOT NULL,        -- MM-DD slice for daily lookup
+  status TEXT DEFAULT 'active',     -- active | fired | cancelled
+  last_fired_year INTEGER,          -- year we last fired the reminder, prevents double-fire
+  gift_id TEXT,                     -- gift created when the reminder fires
+  created_at TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_sched_md ON scheduled_gifts(birthday_md);
+CREATE INDEX IF NOT EXISTS idx_sched_status ON scheduled_gifts(status);

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book cover preview · thebookofyour.life</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#171717;--bg4:#1d1d1d;--gold:#c9a84c;--gold-l:#e8d5a3;--gold-d:#8a7235;--accent:#d4764e;--cream:#f5f0e8;--cream-d:#b8b0a0;--dim:#666;--r:16px}
+body{background:var(--bg);color:var(--cream);font-family:'Inter','Helvetica Neue',Arial,sans-serif;line-height:1.6;padding:60px 24px;min-height:100vh}
+.head{max-width:880px;margin:0 auto 40px;text-align:center}
+.head h1{font-family:'Georgia',serif;font-size:2.2rem;color:var(--cream)}
+.head h1 em{font-style:italic;color:var(--gold)}
+.head p{color:var(--cream-d);font-size:.95rem;margin-top:10px}
+.note{display:block;margin-top:18px;font-size:.78rem;color:var(--dim);font-family:monospace;letter-spacing:1px}
+.compare{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.col h3{font-family:'Georgia',serif;font-size:1rem;color:var(--gold);margin-bottom:14px;padding-bottom:8px;border-bottom:1px dashed rgba(201,168,76,.2);letter-spacing:.5px}
+/* Book card — mirrors the live styles */
+.book-card{display:flex;gap:18px;padding:20px;background:var(--bg3);border:1px solid #1a1a1a;border-radius:var(--r);margin-bottom:14px;transition:border-color .3s;align-items:flex-start}
+.book-card:hover{border-color:var(--gold-d)}
+.book-emoji{font-size:2rem;min-width:40px;text-align:center;padding-top:2px}
+.book-cover{position:relative;flex-shrink:0;width:74px;height:108px;border-radius:6px;overflow:hidden;background:linear-gradient(145deg,#1a1a1a,#0d0d0d);box-shadow:5px 5px 14px rgba(0,0,0,.55),-2px -2px 8px rgba(201,168,76,.04),inset 0 1px 0 rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15)}
+.book-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.book-cover.fallback{display:flex;align-items:center;justify-content:center;font-family:'Georgia',serif;color:var(--gold-d);font-size:1.6rem}
+.book-info{flex:1;min-width:0}
+.book-info .bt{font-family:'Georgia',serif;font-size:1.05rem;color:var(--cream);line-height:1.3;margin-bottom:4px}
+.book-info .ba{font-size:.78rem;color:var(--gold);margin-bottom:8px;letter-spacing:.3px}
+.book-info .bc{font-size:.85rem;color:var(--cream-d);line-height:1.55;margin-bottom:8px}
+.book-info .teaser{font-family:'Georgia',serif;font-style:italic;font-size:.86rem;color:var(--gold-l);line-height:1.5;border-left:2px solid var(--gold-d);padding:8px 0 8px 14px;margin:8px 0 12px}
+.amz-btn{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:11px 20px;background:linear-gradient(145deg,#1a1a1a,#0d0d0d);color:var(--gold-l);font-weight:600;font-size:.82rem;border-radius:14px;border:1px solid rgba(201,168,76,.18);cursor:pointer;text-decoration:none;transition:all .35s cubic-bezier(.16,1,.3,1);font-family:'Inter',sans-serif;box-shadow:6px 6px 14px rgba(0,0,0,.55),-3px -3px 10px rgba(201,168,76,.04),inset 0 1px 0 rgba(255,255,255,.04);letter-spacing:.3px}
+.amz-btn:hover{color:var(--gold);border-color:rgba(201,168,76,.42);transform:translateY(-2px)}
+.amz-btn::after{content:'→';margin-left:2px;color:var(--gold-d);font-weight:400}
+@media(max-width:740px){.compare{grid-template-columns:1fr}.book-card{flex-direction:row;gap:14px}.book-cover{width:60px;height:88px}}
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>Book card · <em>cover preview</em></h1>
+  <p>Left: the current state. Right: with the cover image, larger title, and an italicized teaser line from the author.</p>
+  <span class="note">SOURCE · openlibrary.org/covers · ISBN-based · gracefully falls back when missing</span>
+</div>
+
+<div class="compare">
+  <div class="col">
+    <h3>BEFORE — current</h3>
+    <div class="book-card">
+      <div class="book-emoji">📖</div>
+      <div class="book-info">
+        <div class="bt">Meditations</div>
+        <div class="ba">by Marcus Aurelius · ₹350</div>
+        <div class="bc">An emperor's private journal, raw reminders to be patient, to forgive, to not fear death. The most intimate document a world leader ever produced.</div>
+        <a href="#" class="amz-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="color:#d4764e"><path d="M1.5 2.5h2l.5 2h17l-1.5 9h-13l-.5-2h12l1-6H5.5l-.5-2h-3.5v-1zm4.5 15a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm10 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
+          Get on Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <h3>AFTER — with cover &amp; teaser</h3>
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="https://covers.openlibrary.org/b/isbn/9780140449334-M.jpg" alt="Meditations cover"
+             onerror="this.parentNode.classList.add('fallback');this.style.display='none';this.parentNode.textContent='✦'">
+      </div>
+      <div class="book-info">
+        <div class="bt">Meditations</div>
+        <div class="ba">by Marcus Aurelius · ₹350</div>
+        <div class="teaser">"Begin each day by telling yourself: today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness."</div>
+        <a href="#" class="amz-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="color:#d4764e"><path d="M1.5 2.5h2l.5 2h17l-1.5 9h-13l-.5-2h12l1-6H5.5l-.5-2h-3.5v-1zm4.5 15a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm10 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/></svg>
+          Get on Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="head" style="margin-top:60px">
+  <p style="font-size:.85rem">Note: covers come in three sizes from Open Library (S 90px, M 180px, L 500px). Using <b>M</b> at 74×108 gets us crisp display + low bandwidth. The card has a soft inner shadow + hairline gold border to make the cover feel framed in the dark UI.</p>
+</div>
+</body>
+</html>

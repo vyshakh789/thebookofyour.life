@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#0a0a0a}
+body{
+  background:
+    radial-gradient(ellipse at 50% 28%, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0) 55%),
+    linear-gradient(145deg,#161616,#070707);
+  color:#f5f0e8;
+  position:relative;
+  font-family:'Playfair Display',Georgia,serif;
+}
+
+/* ─── Gold candle-edge frame, deeper ─── */
+.frame{
+  position:absolute;
+  inset:16px;
+  border-radius:26px;
+  box-shadow:
+    inset 0 0 0 1px rgba(201,168,76,0.28),
+    inset 0 0 0 2px rgba(201,168,76,0.05),
+    inset 0 0 40px rgba(201,168,76,0.07),
+    inset 8px 8px 24px rgba(0,0,0,0.6),
+    inset -4px -4px 18px rgba(201,168,76,0.05);
+  pointer-events:none;
+  z-index:5;
+}
+
+/* ─── The shelf — full neumorphic plinth, deeper ─── */
+.shelf-plinth{
+  position:absolute;
+  top:344px;
+  left:50%;
+  transform:translateX(-50%);
+  width:760px;
+  height:32px;
+  border-radius:6px;
+  background:linear-gradient(180deg,#1f1c14 0%,#0d0c08 50%,#080706 100%);
+  box-shadow:
+    /* gold top edge — candle catching the lip */
+    inset 0 1px 0 rgba(255,235,180,0.18),
+    inset 0 2px 0 rgba(201,168,76,0.42),
+    inset 0 3px 6px rgba(201,168,76,0.12),
+    /* dark recess below */
+    inset 0 -2px 0 rgba(0,0,0,0.7),
+    inset 0 -8px 12px rgba(0,0,0,0.45),
+    /* outer drop */
+    0 18px 32px rgba(0,0,0,0.75),
+    0 0 32px rgba(201,168,76,0.06);
+}
+/* The shadow falling from the books DOWN the front face of the shelf */
+.shelf-plinth::before{
+  content:'';
+  position:absolute;
+  top:-14px;
+  left:0;right:0;
+  height:14px;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.55));
+  pointer-events:none;
+}
+/* Sub-shelf glow — the bit of candle light hitting the floor below */
+.shelf-plinth::after{
+  content:'';
+  position:absolute;
+  top:36px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  height:36px;
+  background:radial-gradient(ellipse at center,rgba(201,168,76,0.10) 0%,rgba(201,168,76,0) 70%);
+  pointer-events:none;
+}
+
+/* ─── Book shelf row ─── */
+.shelf{
+  position:absolute;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:20px;
+  align-items:flex-end;
+  z-index:2;
+}
+
+/* ─── Each spine — deeply neumorphic ─── */
+.spine{
+  width:74px;
+  border-radius:5px 5px 3px 3px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:
+    /* big outer lift */
+    14px 18px 32px rgba(0,0,0,0.78),
+    -4px -5px 18px rgba(201,168,76,0.06),
+    /* polished top highlight */
+    inset 0 2px 0 rgba(255,235,180,0.22),
+    inset 0 4px 8px rgba(255,235,180,0.06),
+    /* gold candle-edge all sides */
+    inset 0 0 0 1px rgba(201,168,76,0.38),
+    /* spine recess on right (book binding) */
+    inset -5px 0 12px rgba(0,0,0,0.55),
+    inset 4px 0 8px rgba(0,0,0,0.35),
+    /* base shadow at bottom of spine */
+    inset 0 -6px 12px rgba(0,0,0,0.55),
+    /* ambient gold candle glow */
+    0 0 24px rgba(201,168,76,0.08);
+}
+/* The "page edge" peeking above the spine top — like a real book */
+.spine::before{
+  content:'';
+  position:absolute;
+  top:-3px;
+  left:6px;right:6px;
+  height:5px;
+  background:linear-gradient(180deg,#d4b876 0%,#a8893c 60%,#7a6428 100%);
+  border-radius:2px 2px 0 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,235,180,0.4),
+    0 -2px 4px rgba(201,168,76,0.18),
+    0 1px 0 rgba(0,0,0,0.4);
+}
+.spine span{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;
+  font-size:18px;
+  letter-spacing:.22em;
+  color:#1a1a1a;
+  font-weight:600;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.18),
+    0 -1px 0 rgba(0,0,0,0.3);
+}
+
+/* Six muted, candle-warmed spines — colors slightly desaturated */
+.s1{background:linear-gradient(180deg,#bf9d44 0%,#9d8237 50%,#6f5a23 100%);height:280px}
+.s2{background:linear-gradient(180deg,#3c2718,#1d120a);height:308px}
+.s2 span{color:#c9a84c}
+.s3{background:linear-gradient(180deg,#c9b683,#9b8657);height:292px}
+.s4{background:linear-gradient(180deg,#6c2316,#36100a);height:286px}
+.s4 span{color:#e8d5a3}
+.s5{background:linear-gradient(180deg,#1d3a3d,#0c1f22);height:302px}
+.s5 span{color:#c9a84c}
+.s6{background:linear-gradient(180deg,#bf9d44 0%,#9d8237 50%,#6f5a23 100%);height:272px}
+
+/* ─── Recessed neumorphic backplate behind headline ─── */
+.headline-plate{
+  position:absolute;
+  bottom:60px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:24px 80px 28px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#0c0c0c,#161616);
+  box-shadow:
+    /* recessed — pressed into the surface */
+    inset 6px 6px 14px rgba(0,0,0,0.7),
+    inset -3px -3px 10px rgba(201,168,76,0.04),
+    inset 0 0 0 1px rgba(201,168,76,0.14),
+    /* slight outer halo */
+    0 0 28px rgba(201,168,76,0.05);
+  z-index:3;
+}
+.headline-plate h1{
+  font-family:'Playfair Display',Georgia,serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:72px;
+  line-height:1;
+  color:#c9a84c;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  text-shadow:
+    0 0 60px rgba(201,168,76,0.4),
+    0 0 24px rgba(201,168,76,0.22),
+    0 2px 0 rgba(0,0,0,0.6);
+}
+.headline-plate .dot{color:#e8d5a3}
+</style></head><body>
+
+<div class="frame"></div>
+
+<div class="shelf">
+  <div class="spine s1"><span>STOIC</span></div>
+  <div class="spine s2"><span>ZEN</span></div>
+  <div class="spine s3"><span>BUDDHIST</span></div>
+  <div class="spine s4"><span>EXISTENTIAL</span></div>
+  <div class="spine s5"><span>SUFI</span></div>
+  <div class="spine s6"><span>TAO</span></div>
+</div>
+
+<div class="shelf-plinth"></div>
+
+<div class="headline-plate">
+  <h1>Gift a philosophy<span class="dot">.</span></h1>
+</div>
+
+</body></html>
