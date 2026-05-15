@@ -1,3 +1,10 @@
 node_modules/
 .wrangler/
 .dev.vars
+
+# Auto-sync hygiene
+.DS_Store
+**/.DS_Store
+COVER_PREVIEW.html
+LOGO_PREVIEW.html
+USER_FLOWS.html
